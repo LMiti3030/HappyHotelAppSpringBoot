@@ -1,10 +1,5 @@
 package com.mockitotutorial.happyhotel.booking;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
-
-import java.net.URL;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +9,21 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 
+import java.net.URL;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class Sample02ControllerSampleTest {
+public class Sample02ControllerSampleTestUsingMocks {
 
 	@LocalServerPort
 	private int port;
 
 	private URL base;
+
+	@MockBean
+	private BookingService bookingService;
 
 	@Autowired
 	private TestRestTemplate template;
@@ -34,6 +37,7 @@ public class Sample02ControllerSampleTest {
 	public void getHello() throws Exception {
 		// given
 		String expected = "Greetings from The Happy Hotel. We've got enough beds for 10 guests!";
+		when(bookingService.getAvailablePlaceCount()).thenReturn(10);
 
 		// when
 		ResponseEntity<String> response = template.getForEntity(base.toString(), String.class);
@@ -41,8 +45,6 @@ public class Sample02ControllerSampleTest {
 
 		// then
 		assertEquals(expected, actual);
-
-		//test fails as we use the actual mocks
 	}
 
 }

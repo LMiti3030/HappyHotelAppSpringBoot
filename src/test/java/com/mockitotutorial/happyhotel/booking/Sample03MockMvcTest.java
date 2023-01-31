@@ -20,9 +20,13 @@ public class Sample03MockMvcTest {
 	@Autowired
 	private MockMvc mockMvc;
 
+	@MockBean
+	private BookingService bookingService;
+
 	@Test
 	public void shouldReturnDefaultMessage() throws Exception {
 		// given
+		when(bookingService.getAvailablePlaceCount()).thenReturn(10);
 		
 		// when
 		this.mockMvc.perform(get("/greeting"))
