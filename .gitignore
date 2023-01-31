@@ -1,2 +1,13 @@
 # Project exclude paths
 /target/
+/.classpath
+/.idea/.gitignore
+/.project
+/.idea/compiler.xml
+/.idea/dbnavigator.xml
+/.idea/encodings.xml
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.settings/org.eclipse.jdt.core.prefs
+/.settings/org.eclipse.m2e.core.prefs
+/.idea/vcs.xml
